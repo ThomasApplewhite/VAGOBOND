@@ -1,0 +1,15 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-04-30T18:54:17-07:00
+
+====== TwinstickPrototypeGameplayStory ======
+Created Tuesday 30 April 2024
+
+Players spawn in the center(ish) of a generated player area. They have a few moments to move around and explore before enemeis begin to be spawned offscreen to attack them.
+
+The player has multiple weapons that they can use: A laser, a rotary burst-fire cannon, and missiles. The laser and cannon are shot with the left and right mouse buttons,  and the missiles are launched automatically at the closest enemy.
+
+Enemies will come in three flavors: infantry squads, laser tanks, and rival mechs. 
+* Infantry will move to a spot near the player, stop, and shoot a somewhat innacurate missle at the player, and the infantry will spawn often. 
+* Laser tanks drive up to the player and shoot lasers at them. They will start shooting as soon as they're in max range, but try to hover around effective range. They move away from the player slowly, so they can be run down.
+* Mechs will have rotary burst cannons and missiles that are like the player's, but they shoot fewer shots. Mechs will have a rudimentary AI to dodge stray projectiles, and will have free-er movement than infantry and tanks.

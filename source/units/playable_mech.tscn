@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxqhlwxm1kghi"]
+
+[ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="1_7lrbq"]
+[ext_resource type="Script" path="res://source/units/playable_mech.gd" id="1_wqg67"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ow627"]
+
+[node name="PlayableMech" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_wqg67")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ow627")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7lrbq")

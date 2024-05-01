@@ -1,0 +1,31 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-04-30T18:45:31-07:00
+
+====== InitialDevelopmentTasks ======
+Created Tuesday 30 April 2024
+
+What's the absolute basics of Vagobond?
+
+[ ] Player Character
+	[ ] Move with WASD
+	[ ] Aim with Mouse
+[ ] Health Functionality
+[ ] Projectile Nodes
+	[ ] Projectile Movers
+[ ] Enemy Nodes
+[ ] Weapon Assets
+	* It'd be cool if weapons were data-driven assets. Hmm... What if they could be imported via a spreadsheet? I'll worry about that later.
+	* Now that I think about this, this is just a more involved FIREBALL... time to steal some assets!
+[ ] Enemies
+	[ ] Infantry Squads
+	[ ] Tanks
+	[ ] Rival Mechs
+[ ] Basic Enemy, Weapon, Player, and Background Sprites
+[ ] Basic Music and Sounds
+
+
+What things still need to be thought about or designed?
+[ ] How do weapons, projectiles, those shooting them, and those getting hit by them interact?
+[ ] What is the inheritence relationship between playable and non-playable units? Is there any
+	* I want certain mechs to be pilotable by either players or AI, but maybe that's a feature to figure out later. Yeah...

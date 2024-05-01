@@ -1,0 +1,30 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-04-29T20:23:13-07:00
+
+====== InitialDesignWishlist ======
+Created Monday 29 April 2024
+
+VAGOBOND is a twinstick/vampire survivors/domina type thing with two primary parts: shooting lots of robots and financial managment.
+
+For the Shooting Part:
+* Twinstick movement, topdown robot killing
+* Lots of little enemies, but with several enemy types, such as medium size ones with anti tank gear, small vehicles, other mechs, tanks, super tanks, huge walker type thing, etc
+	* Instead of individual infantry, make individual infantry squads that act as one unit but look like lots of little guys
+* Multiple weapons that the player can wield and shoot simultaneously and can have weapons that fire automatically. The weapons a player can mount can be based on mech hardpoints
+* Multiple drivable mechs with different stats regarding armor, speed, weapon mountability, fuel efficincy, environmental impact, "hell yeah, brother" factor, and weight
+* Semi-randomly generated environments to navigate
+* Objectives (that encourage lots of robot murder)
+* Salvaging money and weapons and items from the field of battle!
+
+For the Managment Part:
+* Green, grimy blade-runner esq UI for selecting equipment and doing mech maintenance (equipping weapons, selecting pilots including yourself, repairing certain armor)
+* All the pilots are just these super scuzzy assholes. Like full cybercollapsepunk-no-neo-corporate warcrime trash
+* You can select missions to do each Pay Cycle (up to a max of who knows?) and send yourself on one of those missions
+* You can BET on the missions you send you and your 'buddies' on to make money on BotWatch(TM). The higher the bet, the higher the diffuclty of the mission
+* You can give pilots (including yourself) escape pods for their mechs or just tell them to eat shit and die
+* Game over if you run out of escape pods and fail a mission OR run out of money, mechs, and faill the DEATH LOAN mission (which rewards good cash if you beat a mission in a shitty mech and game over's you if you lose)
+* So yeah this game will have saves. Oops.
+
+
+This is a //wishlist//. Not everything here needs to be done, or should even be done. But this will guide very early development of what systems I actually need to make work before I can move onto the content grind (TM). I'll obviously want to add asset stuff later, but I'll get to that.

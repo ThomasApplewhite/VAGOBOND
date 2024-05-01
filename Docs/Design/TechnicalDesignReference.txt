@@ -1,0 +1,24 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-04-30T19:08:35-07:00
+
+====== TechnicalDesignReference ======
+Created Tuesday 30 April 2024
+
+Godot's node system and soft typing make composition a pretty easy thing to work with. Instead of defining class inheritance relationships (though those might exist), I'm instead going to define a number of component interactions that are important.
+
+Mover Components move their Node2D parents based on some internal logic
+	Maybe things should be responsible for their own movement? Since 'Movement' is part of behavior logic and there is no non-behavior movement? Then again, I'd like to not repeat 50 million thing-that-moves-along-its-forward-direction. Hmm...
+
+Better idea: There are some inheritance-valid things. Projectiles all kinda use the same functionality, as do weapons and units... well, not all the same... hm...
+
+Best idea: Scripts can require that the node that they're attached to have certain child components. Use the top level script (Projectile, Unit, Enemy, whatever) to define general data requirements and signal behaviors, and then define the behavior of the node with the child component.
+
+For example, projectiles move in a predictable, non-reactive pattern, collide with colliders on a specific level, and do damage. So, projectile.gd can define the need for all of these things, as well as basic initalization and managment behaviors, and then other component nodes can fill in the blanks for what the projectile does. This is where inheritance is useful: not just for the super-level behaviors from the main script (projectile.gd, in this case) but any script/node that extends a required subcomponent can fulfill the main script's components.
+	I'll probably add a config warning to these super scripts to help with setup. Once I figure out how to do that in an intelligent way...
+
+Units like the PlayerMech and InfantrySquad will probably use more inheritance than composition, because the behavior of them is more specialized. I'll figure out how that'll work later.
+
+
+
+
