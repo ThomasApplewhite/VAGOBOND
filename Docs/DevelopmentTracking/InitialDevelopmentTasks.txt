@@ -8,8 +8,9 @@ Created Tuesday 30 April 2024
 What's the absolute basics of Vagobond?
 
 [ ] Player Character
-	[ ] Move with WASD
-	[ ] Aim with Mouse
+	[*] Move with WASD
+	[*] Aim with Mouse
+	[ ] Shoot Projectiles
 [ ] Health Functionality
 [ ] Projectile Nodes
 	[ ] Projectile Movers
@@ -27,5 +28,6 @@ What's the absolute basics of Vagobond?
 
 What things still need to be thought about or designed?
 [ ] How do weapons, projectiles, those shooting them, and those getting hit by them interact?
-[ ] What is the inheritence relationship between playable and non-playable units? Is there any
-	* I want certain mechs to be pilotable by either players or AI, but maybe that's a feature to figure out later. Yeah...
+[ ] What is the inheritence relationship between playable and non-playable units? Is there any?
+	* I want certain mechs to be pilotable by either players or AI, but maybe that's a feature to figure out later. Yeah..
+	* After all, I don't even have AI mechs that act like players yet, so who cares? I'll refactor it later.

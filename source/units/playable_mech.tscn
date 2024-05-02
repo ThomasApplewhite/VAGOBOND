@@ -14,3 +14,5 @@ shape = SubResource("CapsuleShape2D_ow627")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_7lrbq")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,12 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-02T10:34:32-07:00
+
+====== Credits ======
+Created Thursday 02 May 2024
+
+Godot Engine by Godot Contributors
+
+aim2 sprite by oglsdl (OpenGameArt.og)
+
+desertpreview by Beast (OpenGameArt.org)
