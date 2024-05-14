@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 mouse_cursor/custom_image="res://assets/stubsprites/aim2_small.png"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 MoveLeft={

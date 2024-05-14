@@ -7,13 +7,13 @@ Created Tuesday 30 April 2024
 
 What's the absolute basics of Vagobond?
 
-[ ] Player Character
+[*] Player Character
 	[*] Move with WASD
 	[*] Aim with Mouse
-	[ ] Shoot Projectiles
+	[*] Shoot Projectiles
 [ ] Health Functionality
 [ ] Projectile Nodes
-	[ ] Projectile Movers
+	[<] Projectile Movers
 [ ] Enemy Nodes
 [ ] Weapon Assets
 	* It'd be cool if weapons were data-driven assets. Hmm... What if they could be imported via a spreadsheet? I'll worry about that later.
@@ -25,9 +25,15 @@ What's the absolute basics of Vagobond?
 [ ] Basic Enemy, Weapon, Player, and Background Sprites
 [ ] Basic Music and Sounds
 
+What unforseen things have come up?
+[ ] How should the shooter's velocity be added to a shot projectile's velocity? not all projectiles will be hitscane
+	* Well, in real life, the projectile would just go that much faster. conservation of momentum and all that...
+
 
 What things still need to be thought about or designed?
 [ ] How do weapons, projectiles, those shooting them, and those getting hit by them interact?
+	[ ] Collision Layer Definitions
+[ ] How should projectiles be composited? how much of their functionality should come from composites, and how much should come from inherited scene structure?
 [ ] What is the inheritence relationship between playable and non-playable units? Is there any?
 	* I want certain mechs to be pilotable by either players or AI, but maybe that's a feature to figure out later. Yeah..
 	* After all, I don't even have AI mechs that act like players yet, so who cares? I'll refactor it later.

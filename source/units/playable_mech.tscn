@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxqhlwxm1kghi"]
+[gd_scene load_steps=6 format=3 uid="uid://cxqhlwxm1kghi"]
 
 [ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="1_7lrbq"]
 [ext_resource type="Script" path="res://source/units/playable_mech.gd" id="1_wqg67"]
+[ext_resource type="PackedScene" uid="uid://b4bkdw0006ani" path="res://source/projectiles/projectile_shooter.tscn" id="3_fyyat"]
+[ext_resource type="PackedScene" uid="uid://jx1t3v4hjadr" path="res://source/projectiles/stub_projectile.tscn" id="4_3ghdu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ow627"]
 
@@ -16,3 +18,8 @@ shape = SubResource("CapsuleShape2D_ow627")
 texture = ExtResource("1_7lrbq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ProjectileShooter" parent="." instance=ExtResource("3_fyyat")]
+position = Vector2(91, -76)
+projectile_scene = ExtResource("4_3ghdu")
+should_follow_cursor = true
