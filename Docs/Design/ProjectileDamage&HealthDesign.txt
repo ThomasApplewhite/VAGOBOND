@@ -1,0 +1,120 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-15T18:23:08-07:00
+
+====== ProjectileDamage&HealthDesign ======
+Created Wednesday 15 May 2024
+
+The goal is the following:
+* Nodes can be given all neccesary health functionality by having a HealthFunc node
+* Projectiles can be composited together from subnodes to achieve most of their functionality without code repetitiion
+* Damage functionality does not need to iterate through an attacked/collided objects parents to be able to find a reference to the health func to damage it (accessing a HealthFunc should be an O(1) operation)
+
+
+Health is pretty easy. It just needs to be a script that holds the health value and some related properties, has methods for healing and damaging, and emits relevant signals when health things occur.
+
+Projectiles could have any number of behaviors, but they probably all move and deal damage and collide with things. Damage dealing is easy, it's essentially what health needs but in reverse: a number with some utility methods and signals. Collision can also be easy, as collisions should be Area2Ds or Body2Ds and thus the root of their scenes, but maybe they shouldn't be to also seperate out that functionality. Movement always relies on the node root. So, how do we initialize all these things without tying the signals/node relationships together in the gui?
+
+Well, we can have the projectile scene parent be a generalized initialize script that searches for certain nodes directly But what is a general, typless way to do that? Groups? idk..
+
+There's also the question of how to handle the actual damage collisions. How can a damage dealer node quickly access a health node without needing to iterate through a massive scene tree? hmm...
+
+You know, there's that open-source Godot arena shooter. Maybe I'll take a look at that.
+Yeah that went nowhere. Still really cool, but not what I'm looking for..
+
+Here's a thought: I'm coming at this from a very Unreal perspective: the composition is code-defined and then reflected into the GUI asset at compile time. These aren't concepts that Godot has. Godot is very much a find-it-just-in-time language. So, real question is: why am I avoiding the GUI?
+
+Connecting through code is more stable and easier to search, so is probably the better idea overall, especially for "prefab" scenes.
+
+Good learning from the docs (amen!)
+https://docs.godotengine.org/en/stable/tutorials/best_practices/what_are_godot_classes.html#
+https://docs.godotengine.org/en/stable/tutorials/best_practices/scenes_versus_scripts.html
+https://docs.godotengine.org/en/stable/tutorials/best_practices/scene_organization.html
+https://docs.godotengine.org/en/stable/tutorials/best_practices/node_alternatives.html
+https://docs.godotengine.org/en/stable/tutorials/best_practices/godot_notifications.html
+
+Important takeaways:
+My understanding of scenes being meant as a declarative-composition is correct
+Declaring a scene entirely in its script is not ideal, due to speed differences. Favor composition.
+Functionality should be saved in as a scene. Scripts attached to scenes are just extensions of scenes, essentially the same thing. Saving them as packed scenes/composing them in the GUI is faster.
+Callable properties allow you to decouple functions from their owners. So you can put init functions in parent scripts and then call them in the child. 
+Nodes should be thought of as an aggregation relationship, not a composition. The primary difference seems to be that aggregatewd objects have independent lifetimes. So, a child node should be able to operate WITHOUT its parent.
+It's not necessary to use nodes for everything! Instead, one can use resources to define both logic and inspector data in assets (as one might with a node) without using node relationships. Instead of adding a child node or something, the resource can handle "static" logic and algorithms, and allow the parent do handle actually applying that information
+	How each projectile moves is different, but they're all gonna be Area2Ds that add to their current position...
+ready is called when the node AND its children are fully initialized. children are accessible, but not the parent
+
+Recap: What do I actually want to do? I want movement and damage behaviors to be easily reusable, and I want damage to be able to access health quickly and easily (without needing lots of node iteration).
+
+Resources aren't a good fit for this, since they are only ever loaded once.
+Objects might be good, if the object script that is used can be set with the inspector (maybe with load/preload?), and I can live with memory managment (especially if only tiny, often reused classes like Projectile are the ones that do this).
+
+As for things that use health... we can craete a base class for health-related entities. Call 'em... Combatants? idk. Characters? hmm. Lets go with characters. These characters have a number of forced child needs from get_configuration_warnings() for things like collision bodies, sprites, movement, and health, much like how components are declared for UE objects (but, again, not).
+
+Plan: What am I actually going to do ->
+* Projectiles and other things will use MovementBehavior objects...
+	* wait a second, if its up for the client to detrermine which way to go, what does the mover actually do? Nothing?
+* Characters will declare nodes that certain NPC and player objects have, like health and collision and movers
+* Damage will need to be coupled with this concept of Characters, since that's how we're going to determine if things have health
+	* That seems silly... healths shouldn't need to attach to characters to be usable...
+
+Did a lot of thinking at the gym. Those notes, verbatim:
+i realize that, if everything in a character node is a child of its characterbody (or, at least, everything visible to it), the it doesn't matter if the parent is that characterbody. the 2d nodes can move as necessary. the only catch is that the super node wouldn't have an accessible position... but that's okay, right? because the physical thing in space is the body, not the super node... maybe you can just add an accessor function to the super node to get the body's global position
+
+i also realize the projectile movement is not worth abstracting. the direction and speed of the movement and consequences of movement would always be handled by the parent, and all things move the same way (move_and_collide or adding position). There is no need to have a node for it.
+
+Next is health. I had been considering damage as coming from the damager, but what if it came from the reciever? The that leaves the question of where the damage data comes from, though, especially when most projectiles are freed when they hit something...
+
+maybe I'm thinking about this wrong. This works in UE or Unity because of the strong typing, which Godot doesn't have.
+
+a parent will know when its body is struck because of signals.
+
+maybe make a damagable body class? since health is essentially extending a collider? but what if a thing has multiple colliders?
+
+if everything is single responsinility and uncoupled (with the exception of the parent target because it needs to know all its children to init them) then contacting the health node with the info after the hit is arbitrary. The split path is this:
+
+Should the projectile be told what the health obj is, and do the modifications?
+or
+Should the collider figure out what the damage info is, and do the modifications?
+
+Damage can be encapsulated into a RefCounted DamageEventContext, so passing it around isn't an issue.
+
+I suppose the question is: how does a projectile know its damage? It probably should be composed the same way as a targetable thing: as aggregated single responsibility nodes.
+
+Parents handle the actual collision event,  obviously. But there should only be one "collision event". Syncing two is silly.
+
+The takeaway here is the following:
+* Projectile movers are unnecessary. If parents already determine everything about movement other than how it's actually done (move_and_slide or adding to global_position), the parent can just do all of those things manually
+	* Well... maybe they should anyways, actually, especially if movers are sibling to the bodies they move and the parent can set up the connection AND initialize both. But this is ONLY useful for not having to repeat the same "move in forward dir at x speed until you hit something" behavior in a bunch of scripts
+	* And, remember: parent scripts can be reused between different scenes. 15 different projectiles can use the same behavior script
+* Whether or not damage and health are specific nodes/scenes or part of scripts doesn't really matter except //maybe// for performance
+* The actual question is this: If bodies are children of the actual 'node' (like a player's CharacterBody2D or a projectile's Area2D), how do we communicate information about the damage to either the health node or the parent of the body? Remember: the Area2D that a player or other Body collides with might not be (probably shouldn't be) the scripted 'projectile' that knows all the damage info
+	* The relation a target has to its body is irrelivent; signals set up by the init node will tell the right nodes about collisions. It's more about determining damage from the incoming projectile.
+
+I've now come to realize, by lying on the couch and staring at the cieling, that there really is no reason for the parent of any world-interactive object to not also be its collider (well, okay, I CAN, in the case of needing multiple colliders, but that's SO far out of scope that I don't care). And if the parent keeps its role as the child initializer and knower, than we can communicate information about damage directly through the collided body.
+
+That being said, I do think I will split health out into its own seperate thing, or maybe the initializer into its own seperate thing, and the script attached to the body can just be collision handling.
+
+Oh but what about AI stuff? Oh gosh...
+No, stop, let's not overcomplicate things. The scene root script will be responsible for the node's overall behavior. Things that CAUSE this behavior will be different nodes under the parent (with the exception of collision, but that is almost entirely handled by the parent collider node...
+
+Yes, I am officially over-thinking things. Hell, this isn't even about projectiles anymore. This has cascaded into a larger thinking about how scenes should be composed.
+I am going to go play some System Shock and sleep on this. I'm sure I'll figure it out in my dreams.
+
+I've slept on it, and here's how it's going to be:
+Root nodes of moving things will be their colliders. Super types of these colliders will be class_name'd types (VBProjectile, VBCharacter, VBPlayer). Parent scripts will handle initialization of child nodes and accessing child nodes. These will come with config warnings to ensure nodes are set up the way they need to be. This may include a support contants script for setting up signals, collision layers, and the like (preloading a constants script is totally fine). Involved required nodes may include:
+VBHealth - handles health logic
+VBCallableLogic - handles how the node behaves. The super node will get a callable for both process and physics process
+VBDamageDealer - damages VBCharacters (if body is VBCharacter: body.get_vbhealth().damage(...)
+Any other nodes the thing needs to work (projectile shooters, sprites, etc...)
+
+So how will projectiles work?
+Projectiles scenes will have VBProjectiles as their parents, a sprite, collider, and a VBDamageDealer, and a VBCallableLogic unique to the projectile (or maybe some projectiles will share) . The CallabelLogic will tell the node to move however its supposed to move. The VBProjectile script will have a signal connected such that, on collision, the projectile will try to damage whatever it hit and then destroy itself.
+	maybe the damage dealer should get folded into the logic? Well, we want to seperate logic into multiple nodes, right? Hmm...
+	Let's not do that, and then specify the kind of thing that VBProjectile gets is a VBProcessCallable (which will have both a phyiscs and normal process callable
+
+
+Wow. That's a lot of stuff. Let's try it!
+
+
+Semi-related note: figure out how configuration warnings work, for the love of God
+

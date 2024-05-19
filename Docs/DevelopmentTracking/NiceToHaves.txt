@@ -6,3 +6,4 @@ Creation-Date: 2024-05-02T09:33:42-07:00
 Created Thursday 02 May 2024
 
 [ ] Non-string InputAction access/reference
+[ ] Editor Icons for class_name'd types (using @icon)

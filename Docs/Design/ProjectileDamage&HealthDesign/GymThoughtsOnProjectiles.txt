@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-19T16:49:49-07:00
+
+====== GymThoughtsOnProjectiles ======
+Created Sunday 19 May 2024
+
+(These are some ideas for the Projectile/Damage/Health thing I had while at the gym. I reached different conclusions than these, I just thought I'd include them
+
+godot thinking
+
+Thu 16 May 2024
+
+i realize that, if everything in a character node is a child of its characterbody (or, at least, everything visible to it), the it doesn't matter if the parent is that characterbody. the 2d nodes can move as necessary. the only catch is that the super node wouldn't have an accessible position... but that's okay, right? because the physical thing in space is the body, not the super node... maybe you can just add an accessor function to the super node to get the body's global position
+
+i also realize the projectile movement is not worth abstracting. the direction and speed of the movement and consequences of movement would always be handled by the parent, and all things move the same way (move_and_collide or adding position). There is no need to have a node for it.
+
+Next is health. I had been considering damage as coming from the damager, but what if it came from the reciever? The that leaves the question of where the damage data comes from, though, especially when most projectiles are freed when they hit something...
+
+maybe I'm thinking about this wrong. This works in UE or Unity because of the strong typing, which Godot doesn't have.
+
+a parent will know when its body is struck because of signals.
+
+maybe make a damagable body class? since health is essentially extending a collider? but what if a thing has multiple colliders?
+
+if everything is single responsinility and uncoupled (with the exception of the parent target because it needs to know all its children to init them) then contacting the health node with the info after the hit is arbitrary. The split path is this:
+
+Should the projectile be told what the health obj is, and do the modifications?
+or
+Should the collider figure out what the damage info is, and do the modifications?
+
+Damage can be encapsulated into a RefCounted DamageEventContext, so passing it around isn't an issue.
+
+I suppose the question is: how does a projectile know its damage? It probably should be composed the same way as a targetable thing: as aggregated single responsibility nodes.
+
+Parents handle the actual collision event,  obviously. But there should only be one "collision event". Syncing two is silly.
