@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccnq53dkn3c13"]
+[gd_scene load_steps=5 format=3 uid="uid://ccnq53dkn3c13"]
 
 [ext_resource type="PackedScene" uid="uid://cxqhlwxm1kghi" path="res://source/units/playable_mech.tscn" id="1_0gj4k"]
 [ext_resource type="Texture2D" uid="uid://h8ux6oen43gv" path="res://assets/stubsprites/desertPreview.png" id="2_kbkqf"]
+[ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="3_ywlcl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utaki"]
+size = Vector2(120, 120)
 
 [node name="TestScene" type="Node2D"]
 
@@ -11,3 +15,14 @@
 z_index = -1
 scale = Vector2(5, 5)
 texture = ExtResource("2_kbkqf")
+
+[node name="TargetDummy" type="Node2D" parent="."]
+position = Vector2(427, 4)
+
+[node name="Sprite2D" type="Sprite2D" parent="TargetDummy"]
+texture = ExtResource("3_ywlcl")
+
+[node name="Area2D" type="Area2D" parent="TargetDummy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetDummy/Area2D"]
+shape = SubResource("RectangleShape2D_utaki")

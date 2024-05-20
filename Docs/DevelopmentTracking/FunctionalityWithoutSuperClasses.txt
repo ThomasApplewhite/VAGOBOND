@@ -1,0 +1,10 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-20T11:43:16-07:00
+
+====== FunctionalityWithoutSuperClasses ======
+Created Monday 20 May 2024
+
+I'm going to write my super classes as I go. The following nodes are high-level functionality nodes (like scene parents) that don't have super classes. This list is meant to track classes so I can call out when/if I should make super classes for them.
+
+* OverlapAndDamageCallable - Inherits Area2D, collides with things, damages them, and then emits a signal that damage has been dealt

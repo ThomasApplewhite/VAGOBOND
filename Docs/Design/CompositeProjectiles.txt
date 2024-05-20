@@ -1,0 +1,8 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-20T11:40:06-07:00
+
+====== CompositeProjectiles ======
+Created Monday 20 May 2024
+
+It took me a very long time to figure out how I wanted to compose my projectiles. This these notes have my scratch-thoughts on the subject. I've since setlled on using the 'VBCallable' idea for behaviors, but not the superclass initializers. I'll add them as necessary/as it becomes helpful, but not right now.

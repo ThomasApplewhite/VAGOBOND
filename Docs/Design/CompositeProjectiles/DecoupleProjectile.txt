@@ -1,0 +1,41 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-19T20:56:30-07:00
+
+====== DecoupleProjectile ======
+Created Sunday 19 May 2024
+
+	* Well.. the parent is in charge of initializiation, right? can the initialization logic be pushed all the way to the projectile superclass? What about initialization logic that is specific to the child???? What do I do about that? ugh...
+	* The ideal would be for the child to be TOTALLY independent of the parent, and just doing its own thing. The problem with this is that the parent attached script would need to manually initialize each child node with custom logic for every individual instance. I don't want to do that.
+	* Is the answer to:
+		1. seperate collision behavior and process behavior into two seperate nodes
+			* This is good. Single purpose responsibility, you know how it is!
+		2. have the parent do ALL the initializing
+			* This is harder. This puts a lot of forced typing on the parent. On the other hand... maybe that's okay. The parent has its children to handle its functionality, doesn't it? But is that too seperated out? At this point it feels like making an individual script for each method... is that so bad? hmm....
+			* Say... is there a way to auto-add child nodes to a script? Isn't that just a scene again?
+			* Wait a minute... what if I defined basic initialization code for the node parent, and then hardcoded-nodepaths and other assist functionality in the children? That's a good idea! It's so obvious!
+
+So, here's how'd be:
+
+VBProjectileArea2D is a supertype that handle initializing process callbacks, which define behavior
+The projectile's script, which isn't a class, specifies what these types are with hardcoded node paths (wait what?)
+
+nevermind, this doesn't make any sense. Here's what I keep coming back to:
+I want to reuse basic behaviors (damage and die on collide, move in forward dir at x speed, etc) without needing to do so in an inherited way. You know, in a composited way.
+Maybe I need to get even simpler. Maybe I should just make a function library? Maybe that'd be for the best. But my dream is to be able to composite together basic projectiles without writing new code.
+	Well, okay sure, but how many projectiles are really going to NEED a different set of behaviors, and not just a visual swap and some new numbers?
+
+I have GOT to figure this out. This is tiring man... should I just get to work and hope everything works out? idk...
+
+what's so bad about having decoupled collider logic...?
+
+And do initializers need to be general?
+
+
+Okay, I have a new idea:
+
+1. I am going to move colliders into child nodes
+2. I am going to do away with generalize parent scripts. If initializations for projectiles become so general that I can just do that, I'll make a general one later.
+
+
+Okay, I've got a composition that I think I like. Take notes on it, clean it a bit, remove the old files, and then push.

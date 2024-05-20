@@ -1,0 +1,11 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-19T19:30:17-07:00
+
+====== EsotericKnowledge ======
+Created Sunday 19 May 2024
+
+There's always more than meets the eye in a project...
+
+
+Tool scripts that have callable calls in their process/physics_process functions will try to call them in editor, probably before they've been set. This looks like an error every froame for "Invalid call. Nonexistent function '0.01666666666667 (via call)' in base 'Nil'". My solution so far is to add null checks before each call.

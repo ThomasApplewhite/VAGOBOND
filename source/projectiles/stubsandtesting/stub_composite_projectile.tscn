@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://btwvy7eduleok"]
+
+[ext_resource type="Script" path="res://source/projectiles/stubsandtesting/stub_composite_projectile.gd" id="1_eegk3"]
+[ext_resource type="Script" path="res://source/vbcore/callables/forward_velocity_callable.gd" id="3_shdnw"]
+[ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="3_uwi3y"]
+[ext_resource type="Script" path="res://source/vbcore/callables/overlap_and_damage_callable.gd" id="4_i1lob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjgx1"]
+size = Vector2(10, 10)
+
+[node name="StubCompositeProjectile" type="Node2D"]
+script = ExtResource("1_eegk3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_uwi3y")
+
+[node name="ForwardVelocityCallable" type="Node" parent="."]
+script = ExtResource("3_shdnw")
+
+[node name="OverlapAndDamageCallable" type="Area2D" parent="."]
+script = ExtResource("4_i1lob")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OverlapAndDamageCallable"]
+shape = SubResource("RectangleShape2D_bjgx1")

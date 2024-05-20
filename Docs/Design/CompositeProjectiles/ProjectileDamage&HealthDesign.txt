@@ -111,6 +111,7 @@ So how will projectiles work?
 Projectiles scenes will have VBProjectiles as their parents, a sprite, collider, and a VBDamageDealer, and a VBCallableLogic unique to the projectile (or maybe some projectiles will share) . The CallabelLogic will tell the node to move however its supposed to move. The VBProjectile script will have a signal connected such that, on collision, the projectile will try to damage whatever it hit and then destroy itself.
 	maybe the damage dealer should get folded into the logic? Well, we want to seperate logic into multiple nodes, right? Hmm...
 	Let's not do that, and then specify the kind of thing that VBProjectile gets is a VBProcessCallable (which will have both a phyiscs and normal process callable
+		[[/j]] I am doing that. It's called a ballisticscallable
 
 
 Wow. That's a lot of stuff. Let's try it!

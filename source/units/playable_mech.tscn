@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="1_7lrbq"]
 [ext_resource type="Script" path="res://source/units/playable_mech.gd" id="1_wqg67"]
 [ext_resource type="PackedScene" uid="uid://b4bkdw0006ani" path="res://source/projectiles/projectile_shooter.tscn" id="3_fyyat"]
-[ext_resource type="PackedScene" uid="uid://jx1t3v4hjadr" path="res://source/projectiles/stub_projectile.tscn" id="4_3ghdu"]
+[ext_resource type="PackedScene" uid="uid://btwvy7eduleok" path="res://source/projectiles/stubsandtesting/stub_composite_projectile.tscn" id="4_bk16w"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ow627"]
 
@@ -21,5 +21,5 @@ texture = ExtResource("1_7lrbq")
 
 [node name="ProjectileShooter" parent="." instance=ExtResource("3_fyyat")]
 position = Vector2(91, -76)
-projectile_scene = ExtResource("4_3ghdu")
+projectile_scene = ExtResource("4_bk16w")
 should_follow_cursor = true

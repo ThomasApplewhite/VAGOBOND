@@ -16,5 +16,4 @@ func shoot_projectile_in_direction(dir_to_shoot : Vector2):
 	projectile_node.global_position = global_position
 	projectile_node.look_at(projectile_node.global_position + dir_to_shoot)
 	get_tree().root.add_child(projectile_node)
-	projectile_node.launch()
 	
