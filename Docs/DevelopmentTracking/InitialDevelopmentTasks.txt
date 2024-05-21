@@ -11,13 +11,14 @@ What's the absolute basics of Vagobond?
 	[*] Move with WASD
 	[*] Aim with Mouse
 	[*] Shoot Projectiles
-[ ] Refactor Player Character into VB classes/into reusable aggregate behavior classes
+[*] Refactor Player Character into VB classes/into reusable aggregate behavior classes
 [ ] Health Functionality
 [*] Projectile Scene
 	[*] Movement Callable
 	[*] Collision Callable
 [ ] Enemy Nodes
 [ ] Weapon Assets
+	[ ] Maybe refactor ProjectileShooter into VBCore scipts? To make creating different kinds of ProjectileShooters easier?
 	* It'd be cool if weapons were data-driven assets. Hmm... What if they could be imported via a spreadsheet? I'll worry about that later.
 	* Now that I think about this, this is just a more involved FIREBALL... time to steal some assets!
 [ ] Enemies

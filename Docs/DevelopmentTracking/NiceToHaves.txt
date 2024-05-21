@@ -8,3 +8,5 @@ Created Thursday 02 May 2024
 [ ] Non-string InputAction access/reference
 [ ] Editor Icons for class_name'd types (using @icon)
 	[ ] VBProcessCallable
+[ ] Make VBProcessCallable return a dict to make indexing the different kinds of callables more obvious/not magic numbers
+[ ] Correct diagonal movement on mech being faster than horizontal movement
