@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba66tdh8o44rd"]
+
+[ext_resource type="Texture2D" uid="uid://vce064keyyu7" path="res://icon.svg" id="1_11mxk"]
+[ext_resource type="Script" path="res://source/units/target_dummy.gd" id="1_xxgrs"]
+[ext_resource type="Script" path="res://source/vbcore/vbhurt_area2d.gd" id="2_skh6q"]
+[ext_resource type="Script" path="res://source/vbcore/vbhealth.gd" id="3_618eg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utaki"]
+size = Vector2(120, 120)
+
+[node name="TargetDummy" type="Node2D"]
+position = Vector2(427, 4)
+script = ExtResource("1_xxgrs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_11mxk")
+
+[node name="VBHurtArea2D" type="Area2D" parent="."]
+script = ExtResource("2_skh6q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VBHurtArea2D"]
+shape = SubResource("RectangleShape2D_utaki")
+
+[node name="VBHealth" type="Node" parent="."]
+script = ExtResource("3_618eg")

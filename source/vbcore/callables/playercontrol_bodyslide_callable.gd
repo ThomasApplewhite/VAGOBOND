@@ -14,7 +14,7 @@ func init_callable_with_body(body_node : CharacterBody2D):
 func _physics_process_internal(delta):
 	var direction = Vector2(Input.get_axis("MoveLeft", "MoveRight"), Input.get_axis("MoveUp", "MoveDown"))
 	if direction:
-		body_to_move.velocity = direction * speed
+		body_to_move.velocity = direction * speed * delta
 	else:
 		body_to_move.velocity = Vector2.ZERO
 
