@@ -16,12 +16,12 @@ What's the absolute basics of Vagobond?
 [*] Projectile Scene
 	[*] Movement Callable
 	[*] Collision Callable
-[ ] Enemy Nodes
 [ ] Weapon Assets
 	[ ] Maybe refactor ProjectileShooter into VBCore scipts? To make creating different kinds of ProjectileShooters easier?
-	[ ] CollisionLayer initialization (a projectile's collisions are going to be different depending on who is shooting it)
+	[*] CollisionLayer initialization (a projectile's collisions are going to be different depending on who is shooting it)
 	* It'd be cool if weapons were data-driven assets. Hmm... What if they could be imported via a spreadsheet? I'll worry about that later.
 	* Now that I think about this, this is just a more involved FIREBALL... time to steal some assets!
+[ ] Enemy Nodes
 [ ] Enemies
 	[ ] Infantry Squads
 	[ ] Tanks
