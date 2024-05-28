@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-27T19:39:57-07:00
+
+====== ThoughtsOnScale ======
+Created Monday 27 May 2024
+
+How big should everything be? Like, size-wise, on the screen?
+
+Larger objects and sprites create a more claustrophobic, intimate view of battle. Required computational resources are reduced because fewer thing will be rendered. Players will have less time to react to approaching threats and will no less about what's about them. Sprites will (or, might) need to be more detailed to fill the closer view of space.
+
+Smaller objects and sprites create a more detached, vouyeristic view of battle. Players get more info on what's attacking them, and can respond from farther away. Sprite detail can be reduced 'cause players can't see it anyways. The only drawback is an increase in resources needed to handle what will certainly mean more in terms of processed entities.
+
+
+I want the farther back view. In my head I have an idea that the player is watching from some sort of drone over the battlefield and watching a controlled NPC doing battle on their behalf. I also want to do something with tiny, low-detail sprites. In my head a group of infantrymen is just a bunch of waddling stick figures. A mech would be bigger, but not by too much. Maybe 3-5 times as tall, at most?
+
+Other than performance considerations, I need to acknowledge what this zoomed out view will do to gameplay. I might sketch some mockups of this and include them here to make decisions. The scale of battle is going to determine a lot about speeds and sprite pixel density/resolution.
+
+Things I'm imagining:
+A smol stompy player mech in the middle of a red dust field absolutely swarmed with infantry, tanks, mechs, flying missles, rubble, stuctures. Really, a very, VERY dense play picture. Kinda like Vampire Survivors, actually, but with a much larger emphesis on player movement and positioning due to all the projectiles and the (comparatively) smaller amount of enemies.
+
+Yeah, definitely sketch these. I should get a drawpad.
