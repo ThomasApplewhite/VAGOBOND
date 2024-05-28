@@ -7,5 +7,11 @@ Created Sunday 19 May 2024
 
 There's always more than meets the eye in a project...
 
-
 Tool scripts that have callable calls in their process/physics_process functions will try to call them in editor, probably before they've been set. This looks like an error every froame for "Invalid call. Nonexistent function '0.01666666666667 (via call)' in base 'Nil'". My solution so far is to add null checks before each call.
+
+	# fun fact: event.button_index and MOUSE_BUTTON_LEFT cannot be compared with is, only ==
+	# I think this is because 'is' is not an equality checker, but a type checker.
+	# MOUSE_BUTTON_LEFT is an enum (int) literal value, not a true type
+
+The "is" keyword is not for comparisons, just type checking. This means that enum values can only be compared with ==
+https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html

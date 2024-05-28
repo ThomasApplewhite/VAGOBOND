@@ -1,0 +1,21 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-27T18:47:56-07:00
+
+====== WeaponPhoneNotes ======
+Created Monday 27 May 2024
+
+projectile thoughts
+
+Mon 27 May 2024
+
+I am going to be really stupid/naive with projectile init.
+
+weapon owners init weapons with collision layer and aiming nature as desired.
+
+when shooting, weapon owners will pass along their initial velocity, if any, as part of the shoot function
+	or maybe a velocity access callable as part of weapon init?
+
+weapons will initialize projectile with initial velocity and collision layers in instance
+
+both projectiles and weapons will get a VB super class to act as interfaces for this. They'll essentially do nothing besides offering these init functions. this  might allow me to move some functionality from the current stubs into a superclass for reuse later

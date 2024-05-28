@@ -1,0 +1,36 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2024-05-27T08:49:41-07:00
+
+====== WeaponsTechDesign ======
+Created Monday 27 May 2024
+
+Weapons are things that shoot projectile and/or do attacking behavior. While this might include things like melee weapons or shield generators or whatever in the future, for right now I'm presuming that all weapons shoot projectiles. That's why there's the ProjectileShooter class. Just, what does it do?
+
+Weapons SHOULD be responsible for:
+* Their own appearance
+* How often they shoot can shoot
+* spawning projectile node instances
+	
+
+Weapons SHOULD NOT be responsible for: 
+* Projectile collision layer setup (in that that info should be initialized from outside)
+	* This is dependent on who is using the weapon
+* moving themselves to be aimed in the proper direction
+	* This is dependent on who is using the weapon
+* when to shoot
+
+Things with NO CLEAR RESPONSIBILITY:
+* Initializing weapon damage
+	* Currently held in an export value in the projectile itself
+	* Should probably be projectile's responsibility
+
+For user-dependent functionality, what I can do is attach callables for all teams/faction aiming and then enable/disable the correct one at init/ready time.
+Remember: despite being scenes, weapons will be instanced at runtime (because I intend for the player to be able to pick their weapons before starting a mission)
+
+Aiming is a responsibility of the weapon's user, so I'll put the callables in the parent scene, not the weapon itself.
+
+I need to consider how I actually intend to make weapon assets. What will be the process for creating them?
+And how do I initialize projectile collision layers if the relationship between projectile and parent is so loose?
+
+What I might end up doing is creating a very basic VBProjectile script that creates an interface between the projectile and anyone who needs to initialize it (for things like collisions and damage layers). When/if weapon data becomes more of an asset thing, I can then use that interface for initializing more than just collision layers.
