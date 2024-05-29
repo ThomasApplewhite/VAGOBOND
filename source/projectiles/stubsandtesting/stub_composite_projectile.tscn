@@ -20,6 +20,7 @@ script = ExtResource("3_shdnw")
 
 [node name="OverlapAndDamageCallable" type="Area2D" parent="."]
 script = ExtResource("4_i1lob")
+damage = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OverlapAndDamageCallable"]
 shape = SubResource("RectangleShape2D_bjgx1")

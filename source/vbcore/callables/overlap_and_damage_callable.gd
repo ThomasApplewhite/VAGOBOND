@@ -16,5 +16,5 @@ func _ready():
 	
 
 func overlapped_node(other : Node):
-	VBHurtArea2D.try_apply_attack_to_vbhurtarea2(other, attack_context)
+	VBHurtArea2D.try_apply_attack_to_vbhurtarea2d(other, attack_context)
 	other_node_damaged.emit()
