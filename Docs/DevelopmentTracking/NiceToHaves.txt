@@ -10,3 +10,4 @@ Created Thursday 02 May 2024
 	[ ] VBProcessCallable
 [ ] Make VBProcessCallable return a dict to make indexing the different kinds of callables more obvious/not magic numbers
 [ ] Figure out how callables deal with variables that come from outside the scope of the callable. That is, figure out if Godot variables have parameter capture
+[ ] Configure Zim to have verbatim text that is ''actually legible!''

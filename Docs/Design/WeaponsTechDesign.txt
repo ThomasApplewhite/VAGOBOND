@@ -34,3 +34,16 @@ I need to consider how I actually intend to make weapon assets. What will be the
 And how do I initialize projectile collision layers if the relationship between projectile and parent is so loose?
 
 What I might end up doing is creating a very basic VBProjectile script that creates an interface between the projectile and anyone who needs to initialize it (for things like collisions and damage layers). When/if weapon data becomes more of an asset thing, I can then use that interface for initializing more than just collision layers.
+
+May 28th
+This is all well and good, but it very tightly couples together weapons, projectiles, and weapon users with the types/interfaces they use. Because, ultimately, none of those types are general.
+
+Dependency Injection would be a pretty good. Players select their weapons in a different UI before gameplay, so whatever spawns the player can spawn their weapons too, and do the initialization that way. Unfortunately, I don't have such functionality yet, so that has to wait.
+
+I have an idea... I was reading about prototypes earlier. The short jank version is that you instantiate the prototype the one time, and then the prototype creates the actual thing you want to make (the clone) and instances it in such a way where the clone is identical to the prototype. The prototype has no active functionality, only the clone goes out into the world and does thing. A Godot prototype can be totally "decoupled" from its clone, in that the prototype can ducktype the clone to be the exact same as itself, so it can assume the clone any property that the prototype has. This might cause a slower ClassDB lookup, but if there's a thing like ''var node = packedscene.instantiate() as self.type'' then I can just do that (assuming doing such a thing is more performant than the ClassDB lookup, which it should be 'cause I'd only need to do that typesave one. And again it's a Godot typehint types aren't real).
+The hard part here is decoupling the creator from the prototype (weapon owner -> weapon and weapon -> projectile) while ideally maintaining node structure. Like, ideally the prototype is a node that exists in the scene tree at all times and is accessed during ready (but without the prototype having a clone's worth of node structure)
+	* For weapons, which would have their projectiles set with export fields/initialization only, perhaps the export field takes a prototype, which is initialized entirely by the weapon at runtime.
+	* For weapon owners (or weapons that have static/scene tree defined projectiles, not from an initialized property)... I don't know
+
+If there's a way the prototype can communicate generally what it wants for initialization (so that VBPrototype can be a class_name'd type with a uniform interface), then the prototype can just be initialized with a method or two without needing to communicate type information. My only concern is that I'd need to document what information is needed for each kind of prototype. Well, I supposed the code would be the documentation? I dunno. Maybe prototypes can return a dictionary with some statically defined keys so the client knows what to fill in? Communicating what actually needs to be provided back to the initialization function is the actual hard part here.
+
